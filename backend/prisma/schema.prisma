@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+datasource db {
+  
+  url=env("DATABASE_URL")
+  provider = "mysql"
+}
+
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma-client-js"
+}  
+
+model User {
+  id_USER   Int      @id @default(autoincrement())
+  password  String 
+  email     String   @unique
+  nom       String
+  prenom    String
+  fonction  String
+  role      Boolean  @default(false)
+  
+}
+
+model Article{
+  id_Article       Int      @id @default(autoincrement())
+  labelArticle String 
+  quantite Int  
+  etat Boolean  @default(false)
+  id_Categorie Int 
+
+}
+
+model Affectation{
+  id_Affectation 	Int      @id @default(autoincrement())
+  type_Affectation    	String 
+  quantite Int 
+  proprietaire 		String
+  date_Affectation  	DateTime
+ 
+
+}
+
+model proprietaire{
+  id_prop            	 Int      @id @default(autoincrement())
+  nom_prop    	     	 String 
+  prenom_prop     	 String
+  cin_prop               Int
+  peofession 		 String
+ 
+ 
+}
+
+model categorie {
+  id_categorie		Int      @id @default(autoincrement())
+  label_categorie       String
+
+}
+
+
+
